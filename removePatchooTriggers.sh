@@ -8,5 +8,5 @@ if [ -f $patchoo ]; then
 	rm $patchoo
 fi
 if [ -f $every120 ]; then
-	rm $every120
+ 	rm $every120
 fi	
