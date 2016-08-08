@@ -1,7 +1,8 @@
 #!/bin/sh
 ################################################################################
 # Author: Scott Blake
-# Modified: 2014-12-20
+# Modified: Adam Shuttleworth
+# Modified: 2016-8-8
 #
 # This script utilizes CocoaDialog.app to convert local Mac OS X user accounts
 # to mobile accounts.
@@ -38,6 +39,8 @@
 #
 #	Version 2.1 - Scott Blake
 #		Properly escape $CD variable.
+#
+# Version 3.0 - Accomodated script to suit company needs
 #
 ################################################################################
 # Variables
