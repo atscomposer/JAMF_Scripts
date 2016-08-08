@@ -43,6 +43,12 @@
 # Variables
 #
 
+# Test if CocoaDialog is not installed. If not installed, it will be installed.
+if [ ! -d "/Library/iRobot/CocoaDialog.app" ]; then
+	jamf policy -trigger installCocoa
+	echo "Installing CocoaDialog"
+fi
+
 # Set the path to the cocoaDialog application.
 # Will be used to display prompts.
 CD="/Library/iRobot/CocoaDialog.app/Contents/MacOS/CocoaDialog"
@@ -109,7 +115,8 @@ fi
 
 # If the machine is not bound to AD, then there's no purpose going any further.
 if [[ "${check4AD}" != "Active Directory" ]]; then
-  die "This machine is not bound to Active Directory. Please bind to AD first."
+  echo "This machine is not bound to Active Directory. We will bind to AD now."
+  jamf policy -trigger bindToAD
 fi
 
 # Lookup a domain account and check exit code for error
