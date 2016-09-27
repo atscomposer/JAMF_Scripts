@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Edit cronjob to schedule this task
+# env EDITOR=nano crontab -e
+
 # Copy MS RDC Preferences and Data to OneDrive
 cp ~/Library/Containers/com.microsoft.rdc.mac/Data/Library/Preferences/com.microsoft.rdc.mac.plist /Users/ashuttleworth/OneDrive\ -\ iRobot\ Corporation/MS_RDP_Backup
 cp -R ~/Library/Containers/com.microsoft.rdc.mac/Data/Library/Application\ Support/Microsoft\ Remote\ Desktop /Users/ashuttleworth/OneDrive\ -\ iRobot\ Corporation/MS_RDP_Backup
