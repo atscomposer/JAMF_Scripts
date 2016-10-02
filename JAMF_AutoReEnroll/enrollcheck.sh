@@ -16,11 +16,11 @@
 
 # JSS URL
 
-JSSurl='https://irbt.jamfcloud.com/'
+JSSurl=''
 
 # URL of quickadd pkg in case we need to re-enroll, alternatively this could be cached locally already
 
-quickaddURL='smb://svc_caspershare_ro:E46eyPOZ6LWuOUk@hq-san-01/master_caspershare/Agent/QuickAdd_CasperAdmin.pkg'
+quickaddURL=''
 
 # path where you want the quickadd package to be dowloaded to
 
@@ -32,7 +32,7 @@ PKGname=QuickAdd_CasperAdmin.pkg
 
 # valid invitation code from JSS QuickAdd
 
-invCode='240222456129689236795346177663802495601'
+invCode=''
 
 ## Set global variables
 

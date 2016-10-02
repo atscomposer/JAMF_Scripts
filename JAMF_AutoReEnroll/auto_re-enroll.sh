@@ -16,10 +16,10 @@
 
 # the URL of your JSS, if you are behind a load balancer you can use the URL and do not put a slash on the end
 # example = https://myjss.company.com:8443
-jssURL='https://irbt.jamfcloud.com'
+jssURL=''
 
 # an inviation code from a quickadd package generated from Recon.app
-invitationCode='240222456129689236795346177663802495601'
+invitationCode=''
 
 
 #### start variables defined by the code and user variables
