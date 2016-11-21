@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -x
 ################################################################################
 # Author: Scott Blake
 # Modified: Adam Shuttleworth

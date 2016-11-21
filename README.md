@@ -1,1 +1,0 @@
-# JAMF_Scripts
