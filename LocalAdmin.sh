@@ -5,11 +5,11 @@
 # Name: LocalAdmin.sh
 # Version: 1.0
 # Create Date:  18 October 2016
-# Last Modified: 18 October 2016
+# Last Modified: 31 October 2016
 #
 # Author:  Adam Shuttleworth
-# Purpose: Script to get assigned user in JSS and elevate the account to local admin
-#		and remove any other local admin
+# Purpose: Script to get assigned user in JSS and elevate their domain account to local admin
+#		and remove any other domain accounts that are local admins
 ###############################################################################
 
 ## Set global variables
@@ -23,11 +23,10 @@ COMPNAME=$( scutil --get ComputerName )
 apiUser=""		## Set the API Username here if you want it hardcoded
 apiPass=""		## Set the API Password here if you want it hardcoded
 jamfURL=""		## Set the JSS URL here if you want it hardcoded
-jamfEAURL="${jssURL}/JSSResource/computers/name/${COMPNAME}/subset/Location" ## Set up the JSS Computer-->User Location URL
 
-#mkdir $LOGPATH
-#echo $STARTIME > $LOGFILE
-#set -xv; exec 1>> $LOGFILE 2>&1
+mkdir $LOGPATH
+echo $STARTIME > $LOGFILE
+set -xv; exec 1>> $LOGFILE 2>&1
 
 ## Check to see if the script was passed any script parameters from Casper
 if [[ "$apiUser" == "" ]] && [[ "$4" != "" ]]; then
@@ -42,6 +41,8 @@ if [[ "$jamfURL" == "" ]] && [[ "$6" != "" ]]; then
 	jamfURL="$6"
 fi
 
+jamfEAURL="${jamfURL}/JSSResource/computers/name/${COMPNAME}/subset/Location" ## Set up the JSS Computer-->User Location URL
+jamfEAURL=$( echo "$jamfEAURL" | sed -e 's/ /%20/g' ) ## Make sure to replace spaces in URL to %20 for correct API lookup later in the script
 ## Finally, make sure we got at least an apiUser & apiPass variable, else we exit
 if [[ -z "$apiUser" ]] || [[ -z "$apiPass" ]]; then
 	echo "API Username = $apiUser\nAPI Password = $apiPass"
@@ -68,7 +69,7 @@ api=$( curl -sfku "${apiUser}":"${apiPass}" "${jamfEAURL}" )
 username=$( echo $api | /usr/bin/awk -F'<username>|</username>' '{print $2}' )
 
 loggedInUID=$( id -u "$3" )
-loggedinUserName=$( user=`ls -l /dev/console | awk '/ / { print $3 }'`)
+loggedinUserName=`/bin/ls -l /dev/console | /usr/bin/awk '{ print $3 }'`
 
 if [[ "$username" == "$loggedinUserName" ]]; then
     echo "User $3 is the primary user of this device."
@@ -91,9 +92,18 @@ if [[ "$username" == "$loggedinUserName" ]]; then
 		fi
 	else
 		echo "$3 is not an Active Directory account. Exiting..."
+		exit 0
 	fi
 else
 	echo "$3 is not the primary user for this device. Exiting..."
+	isAdmin=$( /usr/sbin/dseditgroup -o checkmember -m $3 admin 1> /dev/null; echo $? )
+	if [[ "$isAdmin" -eq 0 ]] && [[ "$loggedInUID" -ge 1000 ]]; then
+	    echo "$3 will be removed from Administrators group."
+	    /usr/sbin/dseditgroup -o edit -d $3 -t user admin 
+	else
+		echo "$3 is correctly a standard user. Exiting..."
+		exit 0
+	fi
 	exit 0
 fi
 

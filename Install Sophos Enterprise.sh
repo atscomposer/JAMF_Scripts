@@ -33,11 +33,12 @@
 /usr/sbin/pkgutil --forget com.microsoft.systemCenterEndpointProtection.SystemCenterEndpointProtection.pkg
 
 #Install Sophos Enterprise (Latest Version)---Pulls Installer from the Sophos Cloud
-cd /Users/Shared/
+mkdir /Users/Shared/Sophos
+cd /Users/Shared/Sophos
 rm -R Sophos*
 curl -O https://dzr-api-amzn-us-west-2-fa88.api-upe.p.hmr.sophos.com/api/download/97d6feb0fe59632b5451a05fbba19ba8/SophosInstall.zip
 unzip SophosInstall.zip &> /dev/null
-chmod -R +x /Users/Shared/Sophos\ Installer.app/
-/Users/Shared/Sophos\ Installer.app/Contents/MacOS/Sophos\ Installer --install
+chmod -R +x /Users/Shared/Sophos/Sophos\ Installer.app/
+/Users/Shared/Sophos/Sophos\ Installer.app/Contents/MacOS/Sophos\ Installer --install
 rm -R Sophos*
 exit
