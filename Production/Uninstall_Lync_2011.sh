@@ -1,12 +1,16 @@
 #!/bin/sh
-####################################################################################################
+
+###############################################################################
 #
-# Created By: Adam Shuttleworth
-# Date Created: 10/31/2016
-# Description: Script to remove Microsoft Lync 2011 for Mac
+# Name: Uninstall_Lync_2011.sh
+# Version: 1.0
+# Create Date:  31 October 2016
+# Last Modified:
 #
+# Author:  Adam Shuttleworth
+# Purpose:  Script to associate the last loggedin user as the asset owner in JAMF
 #
-####################################################################################################
+###############################################################################
 
 #Script for uninstalling the Microsoft Lync 2011 for Mac
 
