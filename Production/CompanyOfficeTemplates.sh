@@ -18,7 +18,7 @@
 # 	2. Create JAMF Policy
 # 		- Frequency: Once per computer
 #		- Package: Templates DMG created in step 1
-#		- Script: This script with the following Parameters:
+#		- Script: This script set at After Priority with the following Parameters:
 #			Parm 4: Deployment Date (i.e. 20170612)
 #			Parm 5: Template Path (i.e. - /Library/SharedFolder)
 #			Parm 6: Default O365 templates directory (i.e. - Library/Group Containers/UBF8T346G9.Office/User Content.localized/Templates.localized)
